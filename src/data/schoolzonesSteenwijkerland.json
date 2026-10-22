@@ -1,0 +1,1312 @@
+[
+  {
+    "id": "schoolzone-600854357-0",
+    "wvkId": "600854357",
+    "schoolName": "OBS Beatrixschool",
+    "address": "Middenweg 4, 8332 CZ Steenwijk",
+    "street": "Middenweg",
+    "houseNumber": "4",
+    "brin6": "13ZM00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7906539,
+    "lng": 6.1355083,
+    "coordinates": [
+      [
+        52.79115383621645,
+        6.135720241631697
+      ],
+      [
+        52.7911401836672,
+        6.135786017045593
+      ],
+      [
+        52.791125969577124,
+        6.135861340343856
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-406467005-1",
+    "wvkId": "406467005",
+    "schoolName": "OBS School B",
+    "address": "Meester Zigher Ter Steghestraat 1, 8331 KG Steenwijk",
+    "street": "Meester Zigher Ter Steghestraat",
+    "houseNumber": "1",
+    "brin6": "13OF00",
+    "aanduidingZone": "markering",
+    "isActieveSchoolzone": true,
+    "tekstWeg": "schoolzone",
+    "tekstBord": "",
+    "zoneNummer": "2956",
+    "gevalideerdDoorGemeente": true,
+    "beginDatum": "27/05/2025",
+    "datumBord": "",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7896285,
+    "lng": 6.1073132,
+    "coordinates": [
+      [
+        52.78913680148584,
+        6.107277691608983
+      ],
+      [
+        52.789174514020345,
+        6.10734527994059
+      ],
+      [
+        52.78921079549761,
+        6.107453648383017
+      ],
+      [
+        52.78943538526603,
+        6.108091820569779
+      ],
+      [
+        52.78946157145281,
+        6.108163599504548
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600854380-2",
+    "wvkId": "600854380",
+    "schoolName": "OBS Emmaschool",
+    "address": "Willem van Engenstraat 75, 8331 CC Steenwijk",
+    "street": "Willem van Engenstraat",
+    "houseNumber": "75",
+    "brin6": "08DX00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7868402,
+    "lng": 6.1374591,
+    "coordinates": [
+      [
+        52.7866652,
+        6.1371791
+      ],
+      [
+        52.7868402,
+        6.1374591
+      ],
+      [
+        52.7870152,
+        6.1377391
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600852692-3",
+    "wvkId": "600852692",
+    "schoolName": "OBS De Samensprong",
+    "address": "Gasthuislaan 86, 8331 MZ Steenwijk",
+    "street": "Gasthuislaan",
+    "houseNumber": "86",
+    "brin6": "14IK00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7803266,
+    "lng": 6.108532,
+    "coordinates": [
+      [
+        52.7801516,
+        6.108252
+      ],
+      [
+        52.7803266,
+        6.108532
+      ],
+      [
+        52.7805016,
+        6.108812
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-408467028-4",
+    "wvkId": "408467028",
+    "schoolName": "KBS Sint Clemens",
+    "address": "Molenstraat 25, 8331 HP Steenwijk",
+    "street": "Molenstraat",
+    "houseNumber": "25",
+    "brin6": "05JI00",
+    "aanduidingZone": "bebording",
+    "isActieveSchoolzone": true,
+    "tekstWeg": "",
+    "tekstBord": "schoolzone",
+    "zoneNummer": "5840",
+    "gevalideerdDoorGemeente": true,
+    "beginDatum": "27/11/2025",
+    "datumBord": "",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7857784,
+    "lng": 6.1186271,
+    "coordinates": [
+      [
+        52.786210955109276,
+        6.117842045490358
+      ],
+      [
+        52.78618834228535,
+        6.117848923846604
+      ],
+      [
+        52.78609370112473,
+        6.117879510942225
+      ],
+      [
+        52.78605779372583,
+        6.117902184096039
+      ],
+      [
+        52.78601255455729,
+        6.11790780315635
+      ],
+      [
+        52.7859688628839,
+        6.117924861806602
+      ],
+      [
+        52.78588191428677,
+        6.117961357950297
+      ],
+      [
+        52.78583874631412,
+        6.117980945154256
+      ],
+      [
+        52.78570992671011,
+        6.118045350697535
+      ],
+      [
+        52.785654570201736,
+        6.118074072797674
+      ],
+      [
+        52.785607047051165,
+        6.118100405665263
+      ],
+      [
+        52.78559957222039,
+        6.118102949039358
+      ],
+      [
+        52.785590491713094,
+        6.118103538627638
+      ],
+      [
+        52.785584476482406,
+        6.118102548851722
+      ],
+      [
+        52.785575702704755,
+        6.118098699636978
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600852693-5",
+    "wvkId": "600852693",
+    "schoolName": "GBS De Wegwijzer",
+    "address": "Gasthuislaan 90, 8331 MZ Steenwijk",
+    "street": "Gasthuislaan",
+    "houseNumber": "90",
+    "brin6": "03CO00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7801696,
+    "lng": 6.1091961,
+    "coordinates": [
+      [
+        52.7799946,
+        6.1089161
+      ],
+      [
+        52.7801696,
+        6.1091961
+      ],
+      [
+        52.7803446,
+        6.1094761
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600853995-6",
+    "wvkId": "600853995",
+    "schoolName": "Kindcentrum Claus",
+    "address": "Middenweg 6, 8332 CZ Steenwijk",
+    "street": "Middenweg",
+    "houseNumber": "6",
+    "brin6": "12LH00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7902867,
+    "lng": 6.1353093,
+    "coordinates": [
+      [
+        52.79115383621645,
+        6.135720241631697
+      ],
+      [
+        52.7911401836672,
+        6.135786017045593
+      ],
+      [
+        52.791125969577124,
+        6.135861340343856
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-601153373-7",
+    "wvkId": "601153373",
+    "schoolName": "Kindcentrum Het Kompas",
+    "address": "Oostwijkstraat 92, 8331 EG Steenwijk",
+    "street": "Oostwijkstraat",
+    "houseNumber": "92",
+    "brin6": "07NW00",
+    "aanduidingZone": "geen schoolzone (weg dichtbij)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7852407,
+    "lng": 6.1201038,
+    "coordinates": [
+      [
+        52.784879242167854,
+        6.12018745710854
+      ],
+      [
+        52.78488304922481,
+        6.120207230301464
+      ],
+      [
+        52.784902202824036,
+        6.120330807716338
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-411466022-8",
+    "wvkId": "411466022",
+    "schoolName": "Kindcentrum Johan Friso",
+    "address": "Schaepmanstraat 5, 8331 AW Steenwijk",
+    "street": "Schaepmanstraat",
+    "houseNumber": "5",
+    "brin6": "12CF00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.784621,
+    "lng": 6.1389996,
+    "coordinates": [
+      [
+        52.78446233642207,
+        6.138897796204798
+      ],
+      [
+        52.78446026274136,
+        6.138975046940125
+      ],
+      [
+        52.78445954121323,
+        6.13904652259728
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600384748-9",
+    "wvkId": "600384748",
+    "schoolName": "Kindcentrum Willem Alexander",
+    "address": "Admiraal de Ruyterstraat 6, 8331 RV Steenwijk",
+    "street": "Admiraal de Ruyterstraat",
+    "houseNumber": "6",
+    "brin6": "11RR00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.783603,
+    "lng": 6.1056839,
+    "coordinates": [
+      [
+        52.783689557753135,
+        6.106271814346131
+      ],
+      [
+        52.78377313918988,
+        6.106219652637904
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-601153395-10",
+    "wvkId": "601153395",
+    "schoolName": "Kindcentrum Bernhard",
+    "address": "Wilhelminastraat 47, 8331 ME Steenwijk",
+    "street": "Wilhelminastraat",
+    "houseNumber": "47",
+    "brin6": "11FW00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7827323,
+    "lng": 6.1188019,
+    "coordinates": [
+      [
+        52.7827252465768,
+        6.118448091927673
+      ],
+      [
+        52.78263569313002,
+        6.118475076263852
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600853166-11",
+    "wvkId": "600853166",
+    "schoolName": "OEC 't Ravelijn",
+    "address": "De Vesting 15, 8332 GL Steenwijk",
+    "street": "De Vesting",
+    "houseNumber": "15",
+    "brin6": "19RN00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7920225,
+    "lng": 6.1149916,
+    "coordinates": [
+      [
+        52.7921933589792,
+        6.115018213095617
+      ],
+      [
+        52.792193068068336,
+        6.115006180273064
+      ],
+      [
+        52.79219638231228,
+        6.114963835313971
+      ],
+      [
+        52.79220009536367,
+        6.114944476028658
+      ],
+      [
+        52.79220550671454,
+        6.114926627487835
+      ],
+      [
+        52.79221393171998,
+        6.114907933605021
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-405468024-12",
+    "wvkId": "405468024",
+    "schoolName": "'t PuzzelsTuk",
+    "address": "J.H.W. Pasmanweg 2a, 8334 RR Tuk",
+    "street": "J.H.W. Pasmanweg",
+    "houseNumber": "2a",
+    "brin6": "30JZ00",
+    "aanduidingZone": "markering",
+    "isActieveSchoolzone": true,
+    "tekstWeg": "schoolzone",
+    "tekstBord": "",
+    "zoneNummer": "3254",
+    "gevalideerdDoorGemeente": true,
+    "beginDatum": "27/11/2025",
+    "datumBord": "",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.794717,
+    "lng": 6.099356,
+    "coordinates": [
+      [
+        52.794706658482546,
+        6.098661881860008
+      ],
+      [
+        52.794774315859854,
+        6.0988035911020635
+      ],
+      [
+        52.794802554338425,
+        6.098860537363416
+      ],
+      [
+        52.794859665554114,
+        6.098973550855404
+      ],
+      [
+        52.79489080873215,
+        6.099025651960939
+      ],
+      [
+        52.79493162676862,
+        6.099082951334802
+      ],
+      [
+        52.79494768187309,
+        6.099100225765419
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-399469006-13",
+    "wvkId": "399469006",
+    "schoolName": "RKB Don Bosco",
+    "address": "Gelderingen 60, 8341 PZ Steenwijkerwold",
+    "street": "Gelderingen",
+    "houseNumber": "60",
+    "brin6": "06YY00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.800346,
+    "lng": 6.0546394,
+    "coordinates": [
+      [
+        52.80005656922178,
+        6.054635640410798
+      ],
+      [
+        52.80005970836092,
+        6.054687540640976
+      ],
+      [
+        52.80006511828119,
+        6.054783120807735
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-401471010-14",
+    "wvkId": "401471010",
+    "schoolName": "Kindcentrum Immanuël",
+    "address": "Ten Holtheweg 3 B, 8341 SC Steenwijkerwold",
+    "street": "Ten Holtheweg",
+    "houseNumber": "3 B",
+    "brin6": "06YR00",
+    "aanduidingZone": "markering en bebording",
+    "isActieveSchoolzone": true,
+    "tekstWeg": "schoolzone",
+    "tekstBord": "schoolzone",
+    "zoneNummer": "5968",
+    "gevalideerdDoorGemeente": true,
+    "beginDatum": "27/11/2025",
+    "datumBord": "",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8053239,
+    "lng": 6.0706571,
+    "coordinates": [
+      [
+        52.8051489,
+        6.0703771
+      ],
+      [
+        52.8053239,
+        6.0706571
+      ],
+      [
+        52.805498899999996,
+        6.0709371
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600672800-15",
+    "wvkId": "600672800",
+    "schoolName": "OBS De Noorderschool",
+    "address": "De Wilgen 16, 8355 BB Giethoorn",
+    "street": "De Wilgen",
+    "houseNumber": "16",
+    "brin6": "18KL00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7396674,
+    "lng": 6.078431,
+    "coordinates": [
+      [
+        52.7394924,
+        6.078151
+      ],
+      [
+        52.7396674,
+        6.078431
+      ],
+      [
+        52.7398424,
+        6.078711
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600672864-16",
+    "wvkId": "600672864",
+    "schoolName": "CNS De Bron",
+    "address": "Eendrachtsplein 1, 8355 DL Giethoorn",
+    "street": "Eendrachtsplein",
+    "houseNumber": "1",
+    "brin6": "13LO01",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7212547,
+    "lng": 6.0784269,
+    "coordinates": [
+      [
+        52.721079700000004,
+        6.0781469
+      ],
+      [
+        52.7212547,
+        6.0784269
+      ],
+      [
+        52.7214297,
+        6.0787069
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600672863-17",
+    "wvkId": "600672863",
+    "schoolName": "De Punter",
+    "address": "Beulakerweg 125 a, 8355 AE Giethoorn",
+    "street": "Beulakerweg",
+    "houseNumber": "125 a",
+    "brin6": "13LO00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7291626,
+    "lng": 6.0778046,
+    "coordinates": [
+      [
+        52.72914577391609,
+        6.077517583420807
+      ],
+      [
+        52.72915301759256,
+        6.077517734684043
+      ],
+      [
+        52.729169914399165,
+        6.077518332203764
+      ],
+      [
+        52.72920147959392,
+        6.0775197704871555
+      ],
+      [
+        52.72923612856189,
+        6.077523476315578
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-411475006-18",
+    "wvkId": "411475006",
+    "schoolName": "OBS De Driesprong",
+    "address": "Meester Gerritsweg 5, 8347 JP Eesveen",
+    "street": "Meester Gerritsweg",
+    "houseNumber": "5",
+    "brin6": "12XY00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8240221,
+    "lng": 6.1412865,
+    "coordinates": [
+      [
+        52.823946484094144,
+        6.141640388485175
+      ],
+      [
+        52.823914654458484,
+        6.141613181155352
+      ],
+      [
+        52.823863482212616,
+        6.141587640369509
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-601212229-19",
+    "wvkId": "601212229",
+    "schoolName": "BS De Lepelaar",
+    "address": "Koningin Julianastraat 78, 8371 WG Scheerwolde",
+    "street": "Koningin Julianastraat",
+    "houseNumber": "78",
+    "brin6": "11TC00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/05/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7584198,
+    "lng": 6.0153667,
+    "coordinates": [
+      [
+        52.758236533738405,
+        6.015213124513071
+      ],
+      [
+        52.758169974332574,
+        6.015283515990164
+      ],
+      [
+        52.758158858795646,
+        6.015294693913013
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-389474015-20",
+    "wvkId": "389474015",
+    "schoolName": "OBS De Slinge",
+    "address": "'t Slingerland 12, 8375 GP Oldemarkt",
+    "street": "'t Slingerland",
+    "houseNumber": "12",
+    "brin6": "09EV00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8208372,
+    "lng": 5.9760014,
+    "coordinates": [
+      [
+        52.820704211726444,
+        5.975927505981578
+      ],
+      [
+        52.82071426761756,
+        5.975976938937873
+      ],
+      [
+        52.8207154831904,
+        5.9759855594089055
+      ],
+      [
+        52.820715438492925,
+        5.975994607957165
+      ],
+      [
+        52.82071292694179,
+        5.976030029015271
+      ],
+      [
+        52.82071088914978,
+        5.976042314361109
+      ],
+      [
+        52.82070338560552,
+        5.976069509143104
+      ],
+      [
+        52.82070276151048,
+        5.9760711669706446
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-389474071-21",
+    "wvkId": "389474071",
+    "schoolName": "RKB St. Bernardus",
+    "address": "Frieseweg 25, 8375 AH Oldemarkt",
+    "street": "Frieseweg",
+    "houseNumber": "25",
+    "brin6": "06VC00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8201868,
+    "lng": 5.9784997,
+    "coordinates": [
+      [
+        52.8200118,
+        5.9782197
+      ],
+      [
+        52.8201868,
+        5.9784997
+      ],
+      [
+        52.8203618,
+        5.9787797000000005
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-389473025-22",
+    "wvkId": "389473025",
+    "schoolName": "PC Basisschool De Ark / De Zonnewijzer",
+    "address": "Burgemeester Kuiperslaan 17, 8375 BJ Oldemarkt",
+    "street": "Burgemeester Kuiperslaan",
+    "houseNumber": "17",
+    "brin6": "06EL00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8179025,
+    "lng": 5.9751905,
+    "coordinates": [
+      [
+        52.81836169352782,
+        5.974659005256406
+      ],
+      [
+        52.818288986773545,
+        5.974746772033758
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-371466016-23",
+    "wvkId": "371466016",
+    "schoolName": "OBS Burgemeester de Ruiterschool",
+    "address": "Vijverpark 89, 8374 KG Kuinre",
+    "street": "Vijverpark",
+    "houseNumber": "89",
+    "brin6": "10TB00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7867813,
+    "lng": 5.8462859,
+    "coordinates": [
+      [
+        52.78689586812511,
+        5.845970516158254
+      ],
+      [
+        52.786810520374196,
+        5.84592455395482
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-381471041-24",
+    "wvkId": "381471041",
+    "schoolName": "Basisschool Eben Haezer (Ossenzijl)",
+    "address": "Schoolstraat 8, 8376 HB Ossenzijl",
+    "street": "Schoolstraat",
+    "houseNumber": "8",
+    "brin6": "15DQ00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8093746,
+    "lng": 5.9196236,
+    "coordinates": [
+      [
+        52.8093299012976,
+        5.919424656065534
+      ],
+      [
+        52.80925977304701,
+        5.919517764067899
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-400475005-25",
+    "wvkId": "400475005",
+    "schoolName": "BS Gen Vd Bosch / De Eekwal",
+    "address": "Paasloregel 1, 8338 ST Willemsoord",
+    "street": "Paasloregel",
+    "houseNumber": "1",
+    "brin6": "14FP00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.8249982,
+    "lng": 6.0608313,
+    "coordinates": [
+      [
+        52.82513406118873,
+        6.0606121169137115
+      ],
+      [
+        52.82518034847249,
+        6.060739354050466
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-387453099-26",
+    "wvkId": "387453099",
+    "schoolName": "CBS De Schutsluis",
+    "address": "Juliana van Stolbergstraat 1, 8356 ER Blokzijl",
+    "street": "Juliana van Stolbergstraat",
+    "houseNumber": "1",
+    "brin6": "04QU00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7266377,
+    "lng": 5.9628203,
+    "coordinates": [
+      [
+        52.726476521445065,
+        5.962925237497857
+      ],
+      [
+        52.72650725041725,
+        5.962981300477545
+      ],
+      [
+        52.726524722484335,
+        5.963047803943179
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-387453104-27",
+    "wvkId": "387453104",
+    "schoolName": "OBS De Rolpaal",
+    "address": "Groenestraat 32, 8356 DB Blokzijl",
+    "street": "Groenestraat",
+    "houseNumber": "32",
+    "brin6": "13QG00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7268105,
+    "lng": 5.9577904,
+    "coordinates": [
+      [
+        52.72669822172691,
+        5.958041140843593
+      ],
+      [
+        52.726706545764486,
+        5.958045238185418
+      ],
+      [
+        52.72674923616056,
+        5.958063557177701
+      ],
+      [
+        52.72678643982656,
+        5.958077314482389
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600241547-28",
+    "wvkId": "600241547",
+    "schoolName": "OBS De Voorpoort",
+    "address": "Groenestraat 36, 8325 AZ Vollenhove",
+    "street": "Groenestraat",
+    "houseNumber": "36",
+    "brin6": "12MU00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6805097,
+    "lng": 5.9547777,
+    "coordinates": [
+      [
+        52.68063537381923,
+        5.954706197123234
+      ],
+      [
+        52.680641387963924,
+        5.954773246648019
+      ],
+      [
+        52.68064406417947,
+        5.954833909291151
+      ],
+      [
+        52.6806441700951,
+        5.954836835123646
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-387442104-29",
+    "wvkId": "387442104",
+    "schoolName": "Chr Kindcentrum Het Kompas (Vollenhove)",
+    "address": "Godfried van Rhenenlaan 1, 8325 EV Vollenhove",
+    "street": "Godfried van Rhenenlaan",
+    "houseNumber": "1",
+    "brin6": "05TY00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6783543,
+    "lng": 5.9589973,
+    "coordinates": [
+      [
+        52.67802559717679,
+        5.958301758593897
+      ],
+      [
+        52.67796175259713,
+        5.958402259609356
+      ],
+      [
+        52.67796046849617,
+        5.958403901032755
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-385442061-30",
+    "wvkId": "385442061",
+    "schoolName": "RK Basissch St Martinus",
+    "address": "Wheeme 12, 8325 AE Vollenhove",
+    "street": "Wheeme",
+    "houseNumber": "12",
+    "brin6": "05KH00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6784361,
+    "lng": 5.9466922,
+    "coordinates": [
+      [
+        52.678359234456686,
+        5.947301204456986
+      ],
+      [
+        52.67844996873131,
+        5.947311610831596
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-393443002-31",
+    "wvkId": "393443002",
+    "schoolName": "De Wiedewereld / OBS De Wiedenschool",
+    "address": "Kloosterweg 32, 8326 CE Sint Jansklooster",
+    "street": "Kloosterweg",
+    "houseNumber": "32",
+    "brin6": "07ED00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6787213,
+    "lng": 6.0069813,
+    "coordinates": [
+      [
+        52.67884669636697,
+        6.007117242949982
+      ],
+      [
+        52.67877622124202,
+        6.007208967843382
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-392439002-32",
+    "wvkId": "392439002",
+    "schoolName": "Basisschool Eben Haezer (Kadoelen)",
+    "address": "Kadoelen 27, 8326 BA Sint Jansklooster",
+    "street": "Kadoelen",
+    "houseNumber": "27",
+    "brin6": "06EM00",
+    "aanduidingZone": "markering",
+    "isActieveSchoolzone": true,
+    "tekstWeg": "schoolzone",
+    "tekstBord": "",
+    "zoneNummer": "1537",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6693413,
+    "lng": 6.0065534,
+    "coordinates": [
+      [
+        52.66887677247566,
+        6.00631505690871
+      ],
+      [
+        52.66891539178798,
+        6.006423020145011
+      ],
+      [
+        52.66893659454593,
+        6.006493392503081
+      ],
+      [
+        52.66895370118641,
+        6.0065564632994
+      ],
+      [
+        52.66896915633259,
+        6.0066260155903315
+      ],
+      [
+        52.668981999951285,
+        6.00669656595638
+      ],
+      [
+        52.668993646778056,
+        6.0067725693753005
+      ],
+      [
+        52.66900264150675,
+        6.00684010885457
+      ],
+      [
+        52.66901950160896,
+        6.00698492906731
+      ],
+      [
+        52.66902706881995,
+        6.007037155158206
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-409448034-33",
+    "wvkId": "409448034",
+    "schoolName": "KC De Lisdodde",
+    "address": "Siebenweg 14, 7946 AD Wanneperveen",
+    "street": "Siebenweg",
+    "houseNumber": "14",
+    "brin6": "04LJ00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.7040832,
+    "lng": 6.1232198,
+    "coordinates": [
+      [
+        52.704174731001196,
+        6.123053898500403
+      ],
+      [
+        52.70418928644715,
+        6.1230984648275015
+      ],
+      [
+        52.70421804150481,
+        6.123183470941688
+      ]
+    ]
+  },
+  {
+    "id": "schoolzone-600849731-34",
+    "wvkId": "600849731",
+    "schoolName": "Chr Basissch Buuzekaemp",
+    "address": "Kerklaan 5, 8066 PJ Belt-Schutsloot",
+    "street": "Kerklaan",
+    "houseNumber": "5",
+    "brin6": "04TV00",
+    "aanduidingZone": "geen schoolzone (BAG locatie)",
+    "isActieveSchoolzone": false,
+    "tekstWeg": "",
+    "tekstBord": "",
+    "zoneNummer": "0",
+    "gevalideerdDoorGemeente": false,
+    "beginDatum": "01/03/2024",
+    "datumBord": "01/03/2024",
+    "jaarLuchtfoto": "2022",
+    "lat": 52.6698037,
+    "lng": 6.062661,
+    "coordinates": [
+      [
+        52.669738028292144,
+        6.062528614138482
+      ],
+      [
+        52.66972911572354,
+        6.062530430541088
+      ],
+      [
+        52.66970681952665,
+        6.062534976876338
+      ],
+      [
+        52.66966597772401,
+        6.062543556522222
+      ]
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapRenderMode } from '../types/ongevallen';
-import { Download } from 'lucide-react';
+import { Download, GraduationCap } from 'lucide-react';
 
 interface TopNavbarProps {
   showFilterPanel: boolean;
@@ -10,6 +10,9 @@ interface TopNavbarProps {
   onOpenDashboard: () => void;
   onOpenEmbedModal: () => void;
   onExportCSV: () => void;
+  showSchoolzones: boolean;
+  onToggleSchoolzones: () => void;
+  schoolzonesCount?: number;
   isEmbed?: boolean;
 }
 
@@ -21,6 +24,9 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
   onOpenDashboard,
   onOpenEmbedModal,
   onExportCSV,
+  showSchoolzones,
+  onToggleSchoolzones,
+  schoolzonesCount = 34,
   isEmbed = false,
 }) => {
   return (
@@ -76,6 +82,28 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
           }`}
         >
           Blackspot Heatmap
+        </button>
+
+        <button
+          type="button"
+          onClick={onToggleSchoolzones}
+          className={`hover:text-[var(--text-main)] transition-colors whitespace-nowrap shrink-0 cursor-pointer pb-0.5 border-b-2 flex items-center gap-1.5 ${
+            showSchoolzones
+              ? 'text-cyan-400 border-cyan-400 font-semibold'
+              : 'border-transparent text-[var(--text-muted)] hover:border-[var(--border-focus)]'
+          }`}
+        >
+          <GraduationCap className="w-4 h-4" />
+          <span>Schoolzones</span>
+          <span
+            className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+              showSchoolzones
+                ? 'bg-cyan-500/20 text-cyan-300 font-bold'
+                : 'bg-black/30 text-[var(--text-dim)]'
+            }`}
+          >
+            {schoolzonesCount}
+          </span>
         </button>
 
         <button

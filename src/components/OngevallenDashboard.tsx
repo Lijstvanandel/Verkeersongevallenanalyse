@@ -4,7 +4,8 @@ import {
   AccidentFilterState,
   VULNERABLE_PARTIES,
 } from '../types/ongevallen';
-import { X, Download, RefreshCw, BarChart3 } from 'lucide-react';
+import { SchoolZone } from '../types/schoolzones';
+import { X, Download, RefreshCw, BarChart3, GraduationCap } from 'lucide-react';
 
 interface OngevallenDashboardProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface OngevallenDashboardProps {
   onExportCSV: () => void;
   onSyncLive: () => void;
   isSyncing: boolean;
+  schoolzones?: SchoolZone[];
 }
 
 const ALL_YEARS = Array.from({ length: 23 }, (_, i) => 2003 + i);
@@ -30,6 +32,7 @@ export const OngevallenDashboard: React.FC<OngevallenDashboardProps> = ({
   onExportCSV,
   onSyncLive,
   isSyncing,
+  schoolzones = [],
 }) => {
   const stats = useMemo(() => {
     let dodelijk = 0;
@@ -185,8 +188,8 @@ export const OngevallenDashboard: React.FC<OngevallenDashboardProps> = ({
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6 text-xs">
-          {/* 1. 5-Column KPI Summary Strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 tabular-nums">
+          {/* 1. 6-Column KPI Summary Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 tabular-nums">
             <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[6px] p-4">
               <div className="text-[11px] text-[var(--text-muted)]">
                 Geregistreerde Ongevallen
@@ -246,13 +249,26 @@ export const OngevallenDashboard: React.FC<OngevallenDashboardProps> = ({
 
             <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[6px] p-4">
               <div className="text-[11px] text-[var(--text-muted)]">
-                Kwetsbare Verkeersdeelnemers
+                Kwetsbare Deelnemers
               </div>
               <div className="font-mono text-2xl font-bold text-[#38bdf8] mt-1">
                 {stats.vulnerableInvolved.toLocaleString('nl-NL')}
               </div>
               <div className="text-[11px] text-[var(--text-dim)] mt-1">
-                Fiets, e-bike, voetganger, bromfiets
+                Fiets, e-bike, voetganger
+              </div>
+            </div>
+
+            <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[6px] p-4">
+              <div className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
+                <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
+                <span>NDW Schoolzones</span>
+              </div>
+              <div className="font-mono text-2xl font-bold text-cyan-400 mt-1">
+                {schoolzones.length}
+              </div>
+              <div className="text-[11px] text-[var(--text-dim)] mt-1">
+                {schoolzones.filter((s) => s.isActieveSchoolzone).length} met markering/zone
               </div>
             </div>
           </div>

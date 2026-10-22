@@ -339,6 +339,27 @@ async function startServer() {
     res.send(csv);
   });
 
+  // 5. Get NDW Schoolzones in Gemeente Steenwijkerland (from WKD_SCHOOLZNV2.shp & wkd_027-SCHOOLZNV2.csv)
+  const SCHOOLZONES_DATA_FILE = path.resolve(__dirname, 'src/data/schoolzonesSteenwijkerland.json');
+  app.get('/api/schoolzones', (_req, res) => {
+    try {
+      if (fs.existsSync(SCHOOLZONES_DATA_FILE)) {
+        const raw = fs.readFileSync(SCHOOLZONES_DATA_FILE, 'utf8');
+        const parsed = JSON.parse(raw);
+        res.json({
+          source: 'NDW Wegkenmerken Database (WKD_SCHOOLZNV2.shp & wkd_027-SCHOOLZNV2.csv)',
+          gemeente: 'Steenwijkerland (1708)',
+          totalCount: parsed.length,
+          schoolzones: parsed,
+        });
+        return;
+      }
+    } catch (e) {
+      console.warn('Error reading schoolzonesSteenwijkerland.json:', e);
+    }
+    res.json({ totalCount: 0, schoolzones: [] });
+  });
+
   if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },

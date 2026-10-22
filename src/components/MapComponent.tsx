@@ -19,7 +19,9 @@ import {
   Flame,
   MapPin,
   SlidersHorizontal,
+  GraduationCap,
 } from 'lucide-react';
+import { SchoolZone } from '../types/schoolzones';
 
 interface MapComponentProps {
   accidents: TrafficAccident[];
@@ -30,6 +32,11 @@ interface MapComponentProps {
   onToggleFilterPanel: () => void;
   showFilterPanel: boolean;
   flyToTarget: { lat: number; lng: number; zoom: number; ts: number } | null;
+  schoolzones?: SchoolZone[];
+  showSchoolzones?: boolean;
+  onToggleSchoolzones?: () => void;
+  selectedSchoolZone?: SchoolZone | null;
+  onSelectSchoolZone?: (zone: SchoolZone | null) => void;
 }
 
 type TileLayerKey = 'osm' | 'opentopo' | 'satellite';
@@ -68,11 +75,17 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   onToggleFilterPanel,
   showFilterPanel,
   flyToTarget,
+  schoolzones = [],
+  showSchoolzones = false,
+  onToggleSchoolzones,
+  selectedSchoolZone = null,
+  onSelectSchoolZone,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const currentTileLayerRef = useRef<L.TileLayer | null>(null);
   const pointsLayerGroupRef = useRef<L.LayerGroup | null>(null);
+  const schoolzonesLayerGroupRef = useRef<L.LayerGroup | null>(null);
   const selectedMarkerLayerRef = useRef<L.LayerGroup | null>(null);
   const canvasRendererRef = useRef<L.Canvas | null>(null);
   const heatmapCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -80,6 +93,19 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
   const [activeTileLayer, setActiveTileLayer] = useState<TileLayerKey>('osm');
   const [showLayerMenu, setShowLayerMenu] = useState(false);
+
+  const onSelectAccidentRef = useRef(onSelectAccident);
+  useEffect(() => {
+    onSelectAccidentRef.current = onSelectAccident;
+  }, [onSelectAccident]);
+
+  const onSelectSchoolZoneRef = useRef(onSelectSchoolZone);
+  useEffect(() => {
+    onSelectSchoolZoneRef.current = onSelectSchoolZone;
+  }, [onSelectSchoolZone]);
+
+  const selectedSvgRendererRef = useRef<L.SVG | null>(null);
+  const maskSvgRendererRef = useRef<L.SVG | null>(null);
 
   // Draw the weighted Blackspot Heatmap on the custom overlay canvas
   const redrawHeatmap = useCallback(() => {
@@ -232,14 +258,26 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     const accidentsPane = map.createPane('accidentsPane');
     accidentsPane.style.zIndex = '410';
 
-    // 3. Selected accident highlight pane
+    // 2b. Custom pane for NDW Schoolzones
+    const schoolzonesPane = map.createPane('schoolzonesPane');
+    schoolzonesPane.style.zIndex = '420';
+
+    // 3. Selected accident highlight pane (strictly non-interactive to never intercept clicks)
     const selectedPane = map.createPane('selectedAccidentPane');
     selectedPane.style.zIndex = '430';
+    selectedPane.style.pointerEvents = 'none';
 
     // 4. Exterior Pitch-Black Mask Pane outside Gemeente Steenwijkerland (`#060e0a`)
     const maskPane = map.createPane('exteriorBlackMaskPane');
     maskPane.style.zIndex = '450';
     maskPane.style.pointerEvents = 'none';
+
+    // Dedicated SVG renderers for non-interactive overlays (ensures zero Canvas interception)
+    const selectedSvgRenderer = L.svg({ pane: 'selectedAccidentPane' });
+    selectedSvgRendererRef.current = selectedSvgRenderer;
+
+    const maskSvgRenderer = L.svg({ pane: 'exteriorBlackMaskPane' });
+    maskSvgRendererRef.current = maskSvgRenderer;
 
     // Base Tile Layer
     const tileConfig = TILE_LAYERS[activeTileLayer];
@@ -258,6 +296,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     ];
 
     L.polygon([outerWorldRing, STEENWIJKERLAND_POLYGON], {
+      renderer: maskSvgRenderer,
       pane: 'exteriorBlackMaskPane',
       stroke: true,
       color: '#437257',
@@ -282,6 +321,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       padding: 0.5,
     });
     pointsLayerGroupRef.current = L.layerGroup().addTo(map);
+    schoolzonesLayerGroupRef.current = L.layerGroup().addTo(map);
     selectedMarkerLayerRef.current = L.layerGroup().addTo(map);
 
     try {
@@ -391,27 +431,29 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         }
       );
 
-      marker.on('click', () => {
-        onSelectAccident(acc);
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        onSelectAccidentRef.current(acc);
       });
 
       layer.addLayer(marker);
     }
-  }, [accidents, renderMode, onSelectAccident]);
+  }, [accidents, renderMode]);
 
-  // Highlight Selected Accident & Pan
+  // Highlight Selected Accident with non-blocking SVG overlay
   useEffect(() => {
-    const map = mapInstanceRef.current;
     const selLayer = selectedMarkerLayerRef.current;
-    if (!map || !selLayer) return;
+    if (!selLayer) return;
 
     selLayer.clearLayers();
     if (!selectedAccident) return;
 
     const meta = getSeverityMeta(selectedAccident.ernst);
+    const renderer = selectedSvgRendererRef.current || undefined;
 
-    // Outer highlight ring
+    // Outer highlight ring rendered in SVG with interactive: false (100% pass-through)
     const ring = L.circleMarker([selectedAccident.lat, selectedAccident.lng], {
+      renderer,
       pane: 'selectedAccidentPane',
       radius: meta.radius + 7,
       fillColor: meta.fillHex,
@@ -425,6 +467,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     const centerDot = L.circleMarker(
       [selectedAccident.lat, selectedAccident.lng],
       {
+        renderer,
         pane: 'selectedAccidentPane',
         radius: meta.radius + 1.5,
         fillColor: meta.fillHex,
@@ -438,11 +481,100 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
     selLayer.addLayer(ring);
     selLayer.addLayer(centerDot);
-
-    map.flyTo([selectedAccident.lat, selectedAccident.lng], Math.max(map.getZoom(), 15), {
-      duration: 0.8,
-    });
   }, [selectedAccident]);
+
+  // Render NDW Schoolzones (road segment polyline + school point marker)
+  useEffect(() => {
+    const layer = schoolzonesLayerGroupRef.current;
+    if (!layer) return;
+
+    layer.clearLayers();
+
+    if (!showSchoolzones || !schoolzones || schoolzones.length === 0) {
+      return;
+    }
+
+    for (const zone of schoolzones) {
+      const isSelected = selectedSchoolZone?.id === zone.id;
+
+      // 1. Draw Road Segment PolyLine if coordinates available
+      if (zone.coordinates && zone.coordinates.length > 0) {
+        const polyline = L.polyline(zone.coordinates, {
+          pane: 'schoolzonesPane',
+          color: isSelected
+            ? '#38bdf8'
+            : zone.isActieveSchoolzone
+            ? '#06b6d4'
+            : '#0d9488',
+          weight: isSelected ? 8 : zone.isActieveSchoolzone ? 5 : 3.5,
+          opacity: isSelected ? 1 : zone.isActieveSchoolzone ? 0.9 : 0.75,
+          dashArray: zone.isActieveSchoolzone ? undefined : '5, 5',
+        });
+
+        polyline.bindTooltip(
+          `<div class="text-xs text-white tabular-nums">
+            <div class="font-bold text-[#38bdf8]">${zone.schoolName}</div>
+            <div class="text-[11px]">${zone.address}</div>
+            <div class="text-[10px] text-cyan-200 capitalize font-medium">${zone.aanduidingZone}</div>
+          </div>`,
+          { direction: 'top', offset: [0, -4] }
+        );
+
+        polyline.on('click', (e) => {
+          L.DomEvent.stopPropagation(e);
+          onSelectSchoolZoneRef.current?.(zone);
+        });
+
+        layer.addLayer(polyline);
+      }
+
+      // 2. School Point Marker with graduation cap icon
+      const iconHtml = `
+        <div class="relative flex items-center justify-center w-7 h-7 rounded-full transition-transform hover:scale-110 cursor-pointer ${
+          isSelected
+            ? 'bg-[#38bdf8] border-2 border-white text-[#060e0a] shadow-xl ring-4 ring-cyan-400/50 scale-110'
+            : zone.isActieveSchoolzone
+            ? 'bg-[#0891b2] border-2 border-white text-white shadow-lg shadow-cyan-950/70 ring-2 ring-cyan-400/30'
+            : 'bg-[#0f766e] border border-cyan-300 text-white shadow-md'
+        }">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+      `;
+
+      const customIcon = L.divIcon({
+        className: 'schoolzone-point-marker',
+        html: iconHtml,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        tooltipAnchor: [0, -16],
+      });
+
+      const marker = L.marker([zone.lat, zone.lng], {
+        icon: customIcon,
+        pane: 'schoolzonesPane',
+      });
+
+      marker.bindTooltip(
+        `<div class="text-xs text-white tabular-nums">
+          <div class="font-bold text-[#38bdf8]">${zone.schoolName}</div>
+          <div class="text-[11px]">${zone.address}</div>
+          <div class="text-[10px] text-cyan-200 capitalize font-medium">${zone.aanduidingZone} · #${zone.wvkId}</div>
+          ${zone.gevalideerdDoorGemeente ? '<div class="text-[10px] text-emerald-400 font-semibold">✓ Gevalideerd door gemeente</div>' : ''}
+        </div>`,
+        { direction: 'top', offset: [0, -12] }
+      );
+
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        onSelectSchoolZoneRef.current?.(zone);
+      });
+
+      layer.addLayer(marker);
+    }
+  }, [showSchoolzones, schoolzones, selectedSchoolZone]);
 
   // Respond to external flyToTarget (e.g. Kern selector or Zoom to Location button)
   useEffect(() => {
@@ -539,6 +671,23 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
           <div className="w-[1px] h-4 bg-[var(--border-subtle)] shrink-0" />
 
+          {/* Schoolzones Layer Toggle Button */}
+          <button
+            type="button"
+            onClick={onToggleSchoolzones}
+            className={`px-2.5 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+              showSchoolzones
+                ? 'bg-[#0891b2] text-white shadow-xs font-bold'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-hover)]'
+            }`}
+            title="Schoolzones (NDW WKD) in/uitschakelen"
+          >
+            <GraduationCap className="w-3.5 h-3.5" />
+            <span>Schoolzones ({schoolzones?.length || 34})</span>
+          </button>
+
+          <div className="w-[1px] h-4 bg-[var(--border-subtle)] shrink-0" />
+
           {/* Basemap Switcher */}
           <button
             type="button"
@@ -581,7 +730,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         {/* Legend */}
         <div className="bg-[var(--bg-card)]/95 backdrop-blur-xs border border-[var(--border-subtle)] rounded-[6px] px-3 py-2 shadow-xl flex flex-wrap items-center gap-3 text-[11px] text-[var(--text-main)]">
           <span className="font-display font-bold text-[var(--text-muted)]">
-            Legenda (AP3_CODE):
+            Legenda:
           </span>
           <span className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full bg-[#e60000] border border-black/50 inline-block" />
@@ -595,6 +744,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             <span className="w-2 h-2 rounded-full bg-[#ffffbe] border border-black/50 inline-block" />
             <span>Materiële schade</span>
           </span>
+          {showSchoolzones && (
+            <span className="flex items-center gap-1.5 pl-2 border-l border-[var(--border-subtle)] text-[#38bdf8]">
+              <span className="w-3.5 h-1.5 bg-[#06b6d4] rounded-full inline-block" />
+              <span className="font-semibold">NDW Schoolzone</span>
+            </span>
+          )}
         </div>
 
         {/* Quick Kern Buttons */}

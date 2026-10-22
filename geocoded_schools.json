@@ -1,0 +1,206 @@
+{
+  "beatrix": {
+    "name": "OBS Beatrixschool",
+    "lat": 52.7906539,
+    "lng": 6.1355083,
+    "display_name": "4, Middenweg, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8332 CZ, Nederland"
+  },
+  "school-b": {
+    "name": "OBS School B",
+    "lat": 52.7896285,
+    "lng": 6.1073132,
+    "display_name": "1, Meester Zigher ter Steghestraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 KG, Nederland"
+  },
+  "emmaschool": {
+    "name": "OBS Emmaschool",
+    "lat": 52.7868402,
+    "lng": 6.1374591,
+    "display_name": "75, Willem van Engenstraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 CC, Nederland"
+  },
+  "samensprong": {
+    "name": "OBS De Samensprong",
+    "lat": 52.7803266,
+    "lng": 6.108532,
+    "display_name": "86, Gasthuislaan, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 MZ, Nederland"
+  },
+  "st-clemens": {
+    "name": "KBS Sint Clemens",
+    "lat": 52.7857784,
+    "lng": 6.1186271,
+    "display_name": "Sint Clemensschool, 25, Molenstraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 HP, Nederland"
+  },
+  "wegwijzer": {
+    "name": "GBS De Wegwijzer",
+    "lat": 52.7801696,
+    "lng": 6.1091961,
+    "display_name": "90, Gasthuislaan, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 MZ, Nederland"
+  },
+  "claus": {
+    "name": "Kindcentrum Claus",
+    "lat": 52.7902867,
+    "lng": 6.1353093,
+    "display_name": "Kindercentrum Claus, 6, Middenweg, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8332 CZ, Nederland"
+  },
+  "kompas-steenwijk": {
+    "name": "Kindcentrum Het Kompas",
+    "lat": 52.7852407,
+    "lng": 6.1201038,
+    "display_name": "92, Oostwijkstraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 EG, Nederland"
+  },
+  "johan-friso": {
+    "name": "Kindcentrum Johan Friso",
+    "lat": 52.784621,
+    "lng": 6.1389996,
+    "display_name": "5, Schaepmanstraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 AW, Nederland"
+  },
+  "willem-alexander": {
+    "name": "Kindcentrum Willem Alexander",
+    "lat": 52.783603,
+    "lng": 6.1056839,
+    "display_name": "6, Admiraal de Ruyterstraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 RV, Nederland"
+  },
+  "bernhard": {
+    "name": "Kindcentrum Bernhard",
+    "lat": 52.7827323,
+    "lng": 6.1188019,
+    "display_name": "47, Wilhelminastraat, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8331 ME, Nederland"
+  },
+  "ravelijn": {
+    "name": "OEC 't Ravelijn",
+    "lat": 52.7920225,
+    "lng": 6.1149916,
+    "display_name": "15, De Vesting, Steenwijk, Steenwijkerland, Overijssel, Nederland, 8332 GL, Nederland"
+  },
+  "puzzelstuk": {
+    "name": "'t PuzzelsTuk",
+    "lat": 52.794717,
+    "lng": 6.099356,
+    "display_name": "'t PuzzelsTuk, 2A, J. H. W. Pasmanweg, Tuk, Steenwijkerland, Overijssel, Nederland, 8334 RR, Nederland"
+  },
+  "don-bosco": {
+    "name": "RKB Don Bosco",
+    "lat": 52.800346,
+    "lng": 6.0546394,
+    "display_name": "60, Gelderingen, Steenwijkerwold, Steenwijkerland, Overijssel, Nederland, 8341 PZ, Nederland"
+  },
+  "immanuel": {
+    "name": "Kindcentrum Immanuël",
+    "lat": 52.8053239,
+    "lng": 6.0706571,
+    "display_name": "3B, Ten Holtheweg, Thij, Steenwijkerwold, Steenwijkerland, Overijssel, Nederland, 8341 PD, Nederland"
+  },
+  "noorderschool": {
+    "name": "OBS De Noorderschool",
+    "lat": 52.7396674,
+    "lng": 6.078431,
+    "display_name": "De Wilgen, Giethoorn, Steenwijkerland, Overijssel, Nederland, 8355 BB, Nederland"
+  },
+  "bron": {
+    "name": "CNS De Bron",
+    "lat": 52.7212547,
+    "lng": 6.0784269,
+    "display_name": "Spetter, 1, Eendrachtsplein, Zuideinde, Giethoorn, Steenwijkerland, Overijssel, Nederland, 8355 DL, Nederland"
+  },
+  "punter": {
+    "name": "De Punter",
+    "lat": 52.7291626,
+    "lng": 6.0778046,
+    "display_name": "125, Beulakerweg, Zuideinde, Giethoorn, Steenwijkerland, Overijssel, Nederland, 8355 AE, Nederland"
+  },
+  "driesprong": {
+    "name": "OBS De Driesprong",
+    "lat": 52.8240221,
+    "lng": 6.1412865,
+    "display_name": "5, Meester Gerritsweg, Eesveen, Steenwijkerland, Overijssel, Nederland, 8347 JP, Nederland"
+  },
+  "lepelaar": {
+    "name": "BS De Lepelaar",
+    "lat": 52.7584198,
+    "lng": 6.0153667,
+    "display_name": "78, Koningin Julianaweg, Scheerwolde, Steenwijkerland, Overijssel, Nederland, 8371 WG, Nederland"
+  },
+  "slinge": {
+    "name": "OBS De Slinge",
+    "lat": 52.8208372,
+    "lng": 5.9760014,
+    "display_name": "12, 't Slingerland, Oldemarkt, Steenwijkerland, Overijssel, Nederland, 8375 GP, Nederland"
+  },
+  "bernardus": {
+    "name": "RKB St. Bernardus",
+    "lat": 52.8201868,
+    "lng": 5.9784997,
+    "display_name": "25, Frieseweg, Oldemarkt, Steenwijkerland, Overijssel, Nederland, 8375 AH, Nederland"
+  },
+  "ark": {
+    "name": "PC Basisschool De Ark / De Zonnewijzer",
+    "lat": 52.8179025,
+    "lng": 5.9751905,
+    "display_name": "17, Burgemeester Kuiperslaan, Oldemarkt, Steenwijkerland, Overijssel, Nederland, 8375 BJ, Nederland"
+  },
+  "ruite-kuinre": {
+    "name": "OBS Burgemeester de Ruiterschool",
+    "lat": 52.7867813,
+    "lng": 5.8462859,
+    "display_name": "89, Vijverpark, Kuinre, Steenwijkerland, Overijssel, Nederland, 8374 KG, Nederland"
+  },
+  "eekwal": {
+    "name": "BS Gen Vd Bosch / De Eekwal",
+    "lat": 52.8249982,
+    "lng": 6.0608313,
+    "display_name": "1, Paasloregel, Willemsoord, Steenwijkerland, Overijssel, Nederland, 8338 ST, Nederland"
+  },
+  "schutsluis": {
+    "name": "CBS De Schutsluis",
+    "lat": 52.7266377,
+    "lng": 5.9628203,
+    "display_name": "1, Juliana van Stolbergstraat, Blokzijl, Steenwijkerland, Overijssel, Nederland, 8356 ER, Nederland"
+  },
+  "rolpaal": {
+    "name": "OBS De Rolpaal",
+    "lat": 52.7268105,
+    "lng": 5.9577904,
+    "display_name": "32, Groenestraat, Blokzijl, Steenwijkerland, Overijssel, Nederland, 8356 DB, Nederland"
+  },
+  "voorpoort": {
+    "name": "OBS De Voorpoort",
+    "lat": 52.6805097,
+    "lng": 5.9547777,
+    "display_name": "36, Groenestraat, Moespot, Vollenhove, Steenwijkerland, Overijssel, Nederland, 8325 AZ, Nederland"
+  },
+  "kompas-vollenhove": {
+    "name": "Chr Kindcentrum Het Kompas (Vollenhove)",
+    "lat": 52.6783543,
+    "lng": 5.9589973,
+    "display_name": "1, Godfried van Rhenenlaan, Vollenhove, Steenwijkerland, Overijssel, Nederland, 8325 EV, Nederland"
+  },
+  "martinus": {
+    "name": "RK Basissch St Martinus",
+    "lat": 52.6784361,
+    "lng": 5.9466922,
+    "display_name": "12, Wheeme, Vollenhove, Steenwijkerland, Overijssel, Nederland, 8325 AE, Nederland"
+  },
+  "wiedewereld": {
+    "name": "De Wiedewereld / OBS De Wiedenschool",
+    "lat": 52.6787213,
+    "lng": 6.0069813,
+    "display_name": "32, Kloosterweg, Kadoelen, Heetveld, Sint Jansklooster, Steenwijkerland, Overijssel, Nederland, 8326 CE, Nederland"
+  },
+  "eben-klooster": {
+    "name": "Basisschool Eben Haezer (Kadoelen)",
+    "lat": 52.6693413,
+    "lng": 6.0065534,
+    "display_name": "27, Kadoelen, Heetveld, Sint Jansklooster, Steenwijkerland, Overijssel, Nederland, 8326 BA, Nederland"
+  },
+  "lisdodde": {
+    "name": "KC De Lisdodde",
+    "lat": 52.7040832,
+    "lng": 6.1232198,
+    "display_name": "14, Siebenweg, Dinxterveen, Wanneperveen, Steenwijkerland, Overijssel, Nederland, 7946 AD, Nederland"
+  },
+  "buuzekaemp": {
+    "name": "Chr Basissch Buuzekaemp",
+    "lat": 52.6698037,
+    "lng": 6.062661,
+    "display_name": "5, Kerklaan, Belt-Schutsloot, Steenwijkerland, Overijssel, Nederland, 8066 PJ, Nederland"
+  }
+}

@@ -5,6 +5,8 @@ import {
   INITIAL_FILTER_STATE,
   getSeverityMeta,
 } from '../types/ongevallen';
+import { SchoolZone, SchoolZoneFilter } from '../types/schoolzones';
+import { findAccidentsNearSchool } from '../utils/schoolzoneUtils';
 import { STEENWIJKERLAND_KERNEN } from '../data/steenwijkerland';
 import {
   Filter,
@@ -15,6 +17,9 @@ import {
   ChevronUp,
   RefreshCw,
   MapPin,
+  GraduationCap,
+  ShieldCheck,
+  ShieldAlert,
 } from 'lucide-react';
 
 interface OngevallenFilterPanelProps {
@@ -28,6 +33,13 @@ interface OngevallenFilterPanelProps {
   onSyncLive: () => void;
   isSyncing: boolean;
   onCloseMobile?: () => void;
+  schoolzones?: SchoolZone[];
+  showSchoolzones?: boolean;
+  onToggleSchoolzones?: () => void;
+  selectedSchoolZone?: SchoolZone | null;
+  onSelectSchoolZone?: (zone: SchoolZone | null) => void;
+  schoolZoneFilter?: SchoolZoneFilter;
+  onChangeSchoolZoneFilter?: (filter: SchoolZoneFilter) => void;
 }
 
 const ALL_YEARS = Array.from({ length: 23 }, (_, i) => 2003 + i); // 2003..2025
@@ -43,10 +55,46 @@ export const OngevallenFilterPanel: React.FC<OngevallenFilterPanelProps> = ({
   onSyncLive,
   isSyncing,
   onCloseMobile,
+  schoolzones = [],
+  showSchoolzones = false,
+  onToggleSchoolzones,
+  selectedSchoolZone = null,
+  onSelectSchoolZone,
+  schoolZoneFilter = 'all',
+  onChangeSchoolZoneFilter,
 }) => {
-  const [activeTab, setActiveTab] = useState<'filters' | 'list'>('filters');
+  const [activeTab, setActiveTab] = useState<'filters' | 'list' | 'schools'>('filters');
   const [showAdvancedRoadFilters, setShowAdvancedRoadFilters] = useState(false);
   const [visibleListCount, setVisibleListCount] = useState(60);
+  const [schoolSearchQuery, setSchoolSearchQuery] = useState('');
+  const [schoolFilterInternal, setSchoolFilterInternal] = useState<SchoolZoneFilter>(schoolZoneFilter);
+
+  const schoolAccidentsCountMap = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const sz of schoolzones) {
+      const nearby = findAccidentsNearSchool(sz, allAccidents, 250);
+      map.set(sz.id, nearby.length);
+    }
+    return map;
+  }, [schoolzones, allAccidents]);
+
+  const filteredSchools = useMemo(() => {
+    return schoolzones.filter((sz) => {
+      if (schoolFilterInternal === 'active_only' && !sz.isActieveSchoolzone) {
+        return false;
+      }
+      if (schoolSearchQuery.trim()) {
+        const q = schoolSearchQuery.toLowerCase();
+        const match =
+          sz.schoolName.toLowerCase().includes(q) ||
+          sz.address.toLowerCase().includes(q) ||
+          sz.wvkId.toLowerCase().includes(q) ||
+          sz.aanduidingZone.toLowerCase().includes(q);
+        if (!match) return false;
+      }
+      return true;
+    });
+  }, [schoolzones, schoolFilterInternal, schoolSearchQuery]);
 
   // Histogram counts per year (2003..2025) across all accidents matching non-year filters
   const yearHistogram = useMemo(() => {
@@ -204,30 +252,42 @@ export const OngevallenFilterPanel: React.FC<OngevallenFilterPanelProps> = ({
         </div>
       </div>
 
-      {/* Mode Switcher Tabs: Filters vs Lijstweergave */}
-      <div className="px-4 pt-2.5 pb-2 border-b border-[var(--border-subtle)] shrink-0">
-        <div className="grid grid-cols-2 gap-1 p-1 bg-[var(--bg-main)] rounded-[5px] border border-[var(--border-subtle)]">
+      {/* Mode Switcher Tabs: Filters vs Ongevallen vs Schoolzones */}
+      <div className="px-3 pt-2.5 pb-2 border-b border-[var(--border-subtle)] shrink-0">
+        <div className="grid grid-cols-3 gap-1 p-1 bg-[var(--bg-main)] rounded-[5px] border border-[var(--border-subtle)]">
           <button
             type="button"
             onClick={() => setActiveTab('filters')}
-            className={`py-1.5 px-3 rounded-[4px] text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
+            className={`py-1.5 px-2 rounded-[4px] text-xs font-semibold transition-colors cursor-pointer text-center truncate ${
               activeTab === 'filters'
                 ? 'bg-[var(--bg-elevated)] text-[var(--text-main)] border border-[var(--border-focus)]'
                 : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
             }`}
           >
-            Filters &amp; Histogram
+            Filters
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('list')}
-            className={`py-1.5 px-3 rounded-[4px] text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap tabular-nums ${
+            className={`py-1.5 px-2 rounded-[4px] text-xs font-semibold transition-colors cursor-pointer text-center truncate tabular-nums ${
               activeTab === 'list'
                 ? 'bg-[var(--bg-elevated)] text-[var(--text-main)] border border-[var(--border-focus)]'
                 : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
             }`}
           >
-            Ongevallenlijst ({filteredAccidents.length})
+            Ongevallen ({filteredAccidents.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('schools')}
+            className={`py-1.5 px-2 rounded-[4px] text-xs font-semibold transition-colors cursor-pointer text-center truncate flex items-center justify-center gap-1 ${
+              activeTab === 'schools'
+                ? 'bg-[var(--bg-elevated)] text-cyan-400 border border-cyan-500/40'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+            }`}
+          >
+            <GraduationCap className="w-3 h-3 shrink-0" />
+            <span>Scholen ({schoolzones.length})</span>
           </button>
         </div>
       </div>
@@ -235,6 +295,39 @@ export const OngevallenFilterPanel: React.FC<OngevallenFilterPanelProps> = ({
       {/* Tab 1: Filters & Histogram */}
       {activeTab === 'filters' ? (
         <div className="flex-1 overflow-y-auto p-4 space-y-5 text-xs">
+          {/* Kaartlaag NDW Schoolzones Quick Card */}
+          <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[5px] p-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-cyan-400" />
+                <span className="font-display font-bold text-xs text-[var(--text-main)]">
+                  NDW Schoolzones (WKD)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={onToggleSchoolzones}
+                className={`px-2.5 py-1 rounded-[4px] text-xs font-semibold cursor-pointer transition-colors ${
+                  showSchoolzones
+                    ? 'bg-[#0891b2] text-white font-bold'
+                    : 'bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                }`}
+              >
+                {showSchoolzones ? 'Zichtbaar' : 'Verborgen'}
+              </button>
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span>{schoolzones.length} schoollocaties &amp; wegvakken</span>
+              <button
+                type="button"
+                onClick={() => setActiveTab('schools')}
+                className="text-cyan-400 hover:underline font-semibold cursor-pointer"
+              >
+                Bekijk scholen &rarr;
+              </button>
+            </div>
+          </div>
+
           {/* 1. ArcGIS Style Year Histogram & Range Condition (2003 - 2025) */}
           <div className="bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[5px] p-3.5 space-y-3">
             <div className="flex items-center justify-between">
@@ -806,6 +899,130 @@ export const OngevallenFilterPanel: React.FC<OngevallenFilterPanelProps> = ({
                   </div>
                 )}
               </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Tab 3: NDW Schoolzones in Steenwijkerland (WKD_SCHOOLZNV2.shp & CSV) */}
+      {activeTab === 'schools' && (
+        <div className="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs">
+          {/* Search bar */}
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+            <input
+              type="text"
+              value={schoolSearchQuery}
+              onChange={(e) => setSchoolSearchQuery(e.target.value)}
+              placeholder="Zoek school, straat of wegvak..."
+              className="w-full bg-[var(--bg-main)] border border-[var(--border-subtle)] rounded-[5px] pl-9 pr-8 py-1.5 text-xs text-[var(--text-main)] placeholder-[var(--text-dim)] focus:border-cyan-400 outline-none"
+            />
+            {schoolSearchQuery && (
+              <button
+                type="button"
+                onClick={() => setSchoolSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-main)] cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* Quick Filter & Layer Toggle Bar */}
+          <div className="flex items-center justify-between gap-2 bg-[var(--bg-main)] p-2.5 rounded-[5px] border border-[var(--border-subtle)]">
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setSchoolFilterInternal('all')}
+                className={`px-2 py-1 rounded-[4px] text-[11px] font-semibold transition-colors cursor-pointer ${
+                  schoolFilterInternal === 'all'
+                    ? 'bg-cyan-600 text-white'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                }`}
+              >
+                Alle ({schoolzones.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setSchoolFilterInternal('active_only')}
+                className={`px-2 py-1 rounded-[4px] text-[11px] font-semibold transition-colors cursor-pointer ${
+                  schoolFilterInternal === 'active_only'
+                    ? 'bg-cyan-600 text-white'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-main)]'
+                }`}
+              >
+                Zones ({schoolzones.filter((s) => s.isActieveSchoolzone).length})
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={onToggleSchoolzones}
+              className={`px-2.5 py-1 rounded-[4px] text-[11px] font-semibold cursor-pointer transition-colors ${
+                showSchoolzones
+                  ? 'bg-[#0891b2] text-white font-bold'
+                  : 'bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
+              }`}
+            >
+              {showSchoolzones ? 'Kaart: Aan' : 'Kaart: Uit'}
+            </button>
+          </div>
+
+          {/* Schools List */}
+          <div className="space-y-1.5">
+            {filteredSchools.length === 0 ? (
+              <div className="p-6 text-center text-xs text-[var(--text-muted)]">
+                Geen scholen gevonden voor &apos;{schoolSearchQuery}&apos;.
+              </div>
+            ) : (
+              filteredSchools.map((sz) => {
+                const isSelected = selectedSchoolZone?.id === sz.id;
+                const count = schoolAccidentsCountMap.get(sz.id) || 0;
+
+                return (
+                  <div
+                    key={sz.id}
+                    onClick={() => {
+                      onSelectSchoolZone?.(sz);
+                      onFlyToKern(sz.lat, sz.lng, 16);
+                    }}
+                    className={`p-3 rounded-[5px] border transition-colors cursor-pointer space-y-1.5 ${
+                      isSelected
+                        ? 'bg-[var(--bg-elevated)] border-cyan-400 ring-1 ring-cyan-400/40'
+                        : 'bg-[var(--bg-main)] hover:bg-[var(--bg-card-hover)] border-[var(--border-subtle)]'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <div className="font-bold text-xs text-[var(--text-main)] truncate">
+                          {sz.schoolName}
+                        </div>
+                        <div className="text-[11px] text-[var(--text-muted)] truncate flex items-center gap-1 mt-0.5">
+                          <MapPin className="w-3 h-3 shrink-0 text-cyan-400" />
+                          <span>{sz.address}</span>
+                        </div>
+                      </div>
+
+                      <span
+                        className={`text-[10px] font-bold px-1.5 py-0.5 rounded-[3px] shrink-0 capitalize ${
+                          sz.isActieveSchoolzone
+                            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                            : 'bg-black/30 text-[var(--text-dim)] border border-[var(--border-subtle)]'
+                        }`}
+                      >
+                        {sz.aanduidingZone}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[10px] text-[var(--text-dim)] pt-1 border-t border-[var(--border-subtle)]">
+                      <span className="font-mono">WVK: {sz.wvkId}</span>
+                      <span className={count > 0 ? 'text-amber-400 font-semibold' : 'text-emerald-400'}>
+                        {count > 0 ? `${count} ongevallen <250m` : '0 ongevallen <250m'}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
             )}
           </div>
         </div>

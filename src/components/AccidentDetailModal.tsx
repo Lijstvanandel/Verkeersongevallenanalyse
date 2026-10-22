@@ -54,7 +54,11 @@ export const AccidentDetailModal: React.FC<AccidentDetailModalProps> = ({
   const meta = getSeverityMeta(accident.ernst);
 
   return (
-    <aside className="absolute right-3 top-3 bottom-3 w-[calc(100%-24px)] sm:w-[390px] z-[550] bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-[8px] shadow-2xl flex flex-col overflow-hidden select-none">
+    <aside
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      className="absolute right-3 top-3 bottom-3 w-[calc(100%-24px)] sm:w-[390px] max-h-[88vh] sm:max-h-none z-[550] bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-[8px] shadow-2xl flex flex-col overflow-hidden select-none"
+    >
       {/* Header — Exact ArcGIS Arcade Popup Gradient & Layout */}
       <div
         style={{ background: meta.headerGradient }}

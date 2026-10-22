@@ -7,11 +7,15 @@ import {
   filterAccidents,
   exportAccidentsToCSV,
 } from './types/ongevallen';
+import { SchoolZone, SchoolZoneFilter } from './types/schoolzones';
 import { isPointInSteenwijkerland } from './data/steenwijkerland';
+import { findAccidentsNearSchool } from './utils/schoolzoneUtils';
+import schoolzonesStaticData from './data/schoolzonesSteenwijkerland.json';
 import { TopNavbar } from './components/TopNavbar';
 import { OngevallenFilterPanel } from './components/OngevallenFilterPanel';
 import { MapComponent } from './components/MapComponent';
 import { AccidentDetailModal } from './components/AccidentDetailModal';
+import { SchoolZoneDetailModal } from './components/SchoolZoneDetailModal';
 import { OngevallenDashboard } from './components/OngevallenDashboard';
 import { EmbedDataproductModal } from './components/EmbedDataproductModal';
 import './firebase';
@@ -44,6 +48,21 @@ export default function App() {
 
   const [isDashboardOpen, setIsDashboardOpen] = useState<boolean>(false);
   const [isEmbedModalOpen, setIsEmbedModalOpen] = useState<boolean>(false);
+
+  // NDW Schoolzones in Gemeente Steenwijkerland (WKD_SCHOOLZNV2.shp & CSV)
+  const [schoolzones, setSchoolzones] = useState<SchoolZone[]>(
+    () => (schoolzonesStaticData as unknown as SchoolZone[]) || []
+  );
+  const [showSchoolzones, setShowSchoolzones] = useState<boolean>(true);
+  const [selectedSchoolZone, setSelectedSchoolZone] = useState<SchoolZone | null>(null);
+  const [schoolZoneFilter, setSchoolZoneFilter] = useState<SchoolZoneFilter>('all');
+
+  const handleSelectSchoolZone = useCallback((zone: SchoolZone | null) => {
+    setSelectedSchoolZone(zone);
+    if (zone) {
+      setSelectedAccident(null);
+    }
+  }, []);
 
   const isEmbed = useMemo(() => {
     if (typeof window === 'undefined') return false;
@@ -110,10 +129,24 @@ export default function App() {
     return filterAccidents(allAccidents, filters);
   }, [allAccidents, filters]);
 
-  // Select an accident and lazy-fetch related Partijen if needed
+  const detailsCacheRef = React.useRef<Map<string, TrafficAccident>>(new Map());
+
+  // Select an accident and lazy-fetch related Partijen if needed without invalidating all markers
   const handleSelectAccident = useCallback(async (acc: TrafficAccident | null) => {
+    if (!acc) {
+      setSelectedAccident(null);
+      return;
+    }
+
+    setSelectedSchoolZone(null); // Close school modal if open
+
+    const cached = detailsCacheRef.current.get(acc.vklNummer);
+    if (cached) {
+      setSelectedAccident(cached);
+      return;
+    }
+
     setSelectedAccident(acc);
-    if (!acc) return;
 
     if (acc.partijen.length === 0 && acc.aantalPartijen > 0) {
       try {
@@ -122,13 +155,9 @@ export default function App() {
           const data = await res.json();
           if (data.accident && Array.isArray(data.accident.partijen)) {
             const updated: TrafficAccident = data.accident;
+            detailsCacheRef.current.set(updated.vklNummer, updated);
             setSelectedAccident((prev) =>
               prev?.vklNummer === updated.vklNummer ? updated : prev
-            );
-            setAllAccidents((prev) =>
-              prev.map((item) =>
-                item.vklNummer === updated.vklNummer ? updated : item
-              )
             );
           }
         }
@@ -137,6 +166,12 @@ export default function App() {
       }
     }
   }, []);
+
+  // Compute accidents near selected school zone
+  const nearbyAccidentsForSelectedSchool = useMemo(() => {
+    if (!selectedSchoolZone) return [];
+    return findAccidentsNearSchool(selectedSchoolZone, allAccidents, 250);
+  }, [selectedSchoolZone, allAccidents]);
 
   // Export current filtered accidents as .CSV
   const handleExportCSV = useCallback(() => {
@@ -166,6 +201,7 @@ export default function App() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setSelectedAccident(null);
+        setSelectedSchoolZone(null);
         setIsDashboardOpen(false);
         setIsEmbedModalOpen(false);
       }
@@ -185,6 +221,9 @@ export default function App() {
         onOpenDashboard={() => setIsDashboardOpen(true)}
         onOpenEmbedModal={() => setIsEmbedModalOpen(true)}
         onExportCSV={handleExportCSV}
+        showSchoolzones={showSchoolzones}
+        onToggleSchoolzones={() => setShowSchoolzones((v) => !v)}
+        schoolzonesCount={schoolzones.length}
         isEmbed={isEmbed}
       />
 
@@ -209,6 +248,9 @@ export default function App() {
               selectedAccident={selectedAccident}
               onSelectAccident={(acc) => {
                 handleSelectAccident(acc);
+                if (acc) {
+                  setFlyToTarget({ lat: acc.lat, lng: acc.lng, zoom: 16, ts: Date.now() });
+                }
                 if (typeof window !== 'undefined' && window.innerWidth < 1024) {
                   setShowFilterPanel(false);
                 }
@@ -219,6 +261,21 @@ export default function App() {
               onSyncLive={handleSyncLive}
               isSyncing={isSyncing}
               onCloseMobile={() => setShowFilterPanel(false)}
+              schoolzones={schoolzones}
+              showSchoolzones={showSchoolzones}
+              onToggleSchoolzones={() => setShowSchoolzones((v) => !v)}
+              selectedSchoolZone={selectedSchoolZone}
+              onSelectSchoolZone={(zone) => {
+                handleSelectSchoolZone(zone);
+                if (zone) {
+                  setFlyToTarget({ lat: zone.lat, lng: zone.lng, zoom: 16, ts: Date.now() });
+                }
+                if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                  setShowFilterPanel(false);
+                }
+              }}
+              schoolZoneFilter={schoolZoneFilter}
+              onChangeSchoolZoneFilter={setSchoolZoneFilter}
             />
           </aside>
         )}
@@ -234,6 +291,11 @@ export default function App() {
             onToggleFilterPanel={() => setShowFilterPanel((v) => !v)}
             showFilterPanel={showFilterPanel}
             flyToTarget={flyToTarget}
+            schoolzones={schoolzones}
+            showSchoolzones={showSchoolzones}
+            onToggleSchoolzones={() => setShowSchoolzones((v) => !v)}
+            selectedSchoolZone={selectedSchoolZone}
+            onSelectSchoolZone={handleSelectSchoolZone}
           />
 
           {/* Initial Loading Overlay */}
@@ -259,6 +321,20 @@ export default function App() {
               setFlyToTarget({ lat, lng, zoom: 16, ts: Date.now() })
             }
           />
+
+          {/* Selected School Zone Detail Panel (WKD NDW) */}
+          <SchoolZoneDetailModal
+            schoolZone={selectedSchoolZone}
+            onClose={() => setSelectedSchoolZone(null)}
+            onCenterOnMap={(lat, lng) =>
+              setFlyToTarget({ lat, lng, zoom: 16, ts: Date.now() })
+            }
+            nearbyAccidents={nearbyAccidentsForSelectedSchool}
+            onSelectAccident={(acc) => {
+              setSelectedSchoolZone(null);
+              handleSelectAccident(acc);
+            }}
+          />
         </section>
 
         {/* Multi-Year Statistics & Analytics Dashboard Modal */}
@@ -268,6 +344,7 @@ export default function App() {
           allAccidents={allAccidents}
           filteredAccidents={filteredAccidents}
           filters={filters}
+          schoolzones={schoolzones}
           onSelectYearRange={(minYear, maxYear) =>
             setFilters((prev) => ({ ...prev, minYear, maxYear }))
           }
