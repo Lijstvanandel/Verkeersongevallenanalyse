@@ -104,6 +104,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     onSelectSchoolZoneRef.current = onSelectSchoolZone;
   }, [onSelectSchoolZone]);
 
+  const schoolzonesSvgRendererRef = useRef<L.SVG | null>(null);
   const selectedSvgRendererRef = useRef<L.SVG | null>(null);
   const maskSvgRendererRef = useRef<L.SVG | null>(null);
 
@@ -254,20 +255,29 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     heatCanvas.style.pointerEvents = 'none';
     heatmapCanvasRef.current = heatCanvas;
 
-    // 2. Custom pane for Accident Points (below exterior mask so nothing bleeds outside border)
+    // 2. Custom pane for Schoolzone road polylines (rendered via dedicated SVG; sits under accidents)
+    const schoolzonesRoadPane = map.createPane('schoolzonesRoadPane');
+    schoolzonesRoadPane.style.zIndex = '395';
+    schoolzonesRoadPane.style.pointerEvents = 'none';
+
+    const schoolzonesSvgRenderer = L.svg({ pane: 'schoolzonesRoadPane' });
+    schoolzonesSvgRendererRef.current = schoolzonesSvgRenderer;
+
+    // 3. Custom pane for Accident Points Canvas (above road lines, direct click handling)
     const accidentsPane = map.createPane('accidentsPane');
-    accidentsPane.style.zIndex = '410';
+    accidentsPane.style.zIndex = '415';
 
-    // 2b. Custom pane for NDW Schoolzones
-    const schoolzonesPane = map.createPane('schoolzonesPane');
-    schoolzonesPane.style.zIndex = '420';
+    // 4. Custom pane for School Point Markers (graduation cap icons above accident dots)
+    const schoolzonesMarkersPane = map.createPane('schoolzonesMarkersPane');
+    schoolzonesMarkersPane.style.zIndex = '425';
+    schoolzonesMarkersPane.style.pointerEvents = 'none';
 
-    // 3. Selected accident highlight pane (strictly non-interactive to never intercept clicks)
+    // 5. Selected accident highlight pane (strictly non-interactive to never intercept clicks)
     const selectedPane = map.createPane('selectedAccidentPane');
-    selectedPane.style.zIndex = '430';
+    selectedPane.style.zIndex = '435';
     selectedPane.style.pointerEvents = 'none';
 
-    // 4. Exterior Pitch-Black Mask Pane outside Gemeente Steenwijkerland (`#060e0a`)
+    // 6. Exterior Pitch-Black Mask Pane outside Gemeente Steenwijkerland (`#060e0a`)
     const maskPane = map.createPane('exteriorBlackMaskPane');
     maskPane.style.zIndex = '450';
     maskPane.style.pointerEvents = 'none';
@@ -494,13 +504,35 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       return;
     }
 
+    const svgRenderer = schoolzonesSvgRendererRef.current || undefined;
+
+    // If a school zone is selected, draw a subtle non-blocking 250m radius circle around it
+    if (selectedSchoolZone) {
+      const radiusCircle = L.circle(
+        [selectedSchoolZone.lat, selectedSchoolZone.lng],
+        {
+          renderer: svgRenderer,
+          pane: 'schoolzonesRoadPane',
+          radius: 250,
+          color: '#38bdf8',
+          weight: 1.5,
+          dashArray: '4, 4',
+          fillColor: '#06b6d4',
+          fillOpacity: 0.1,
+          interactive: false, // Non-interactive so accident markers inside can be hovered & clicked!
+        }
+      );
+      layer.addLayer(radiusCircle);
+    }
+
     for (const zone of schoolzones) {
       const isSelected = selectedSchoolZone?.id === zone.id;
 
       // 1. Draw Road Segment PolyLine if coordinates available
       if (zone.coordinates && zone.coordinates.length > 0) {
         const polyline = L.polyline(zone.coordinates, {
-          pane: 'schoolzonesPane',
+          renderer: svgRenderer,
+          pane: 'schoolzonesRoadPane',
           color: isSelected
             ? '#38bdf8'
             : zone.isActieveSchoolzone
@@ -509,6 +541,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           weight: isSelected ? 8 : zone.isActieveSchoolzone ? 5 : 3.5,
           opacity: isSelected ? 1 : zone.isActieveSchoolzone ? 0.9 : 0.75,
           dashArray: zone.isActieveSchoolzone ? undefined : '5, 5',
+          interactive: true,
         });
 
         polyline.bindTooltip(
@@ -530,14 +563,14 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
       // 2. School Point Marker with graduation cap icon
       const iconHtml = `
-        <div class="relative flex items-center justify-center w-7 h-7 rounded-full transition-transform hover:scale-110 cursor-pointer ${
+        <div class="relative flex items-center justify-center w-7 h-7 rounded-full transition-transform hover:scale-110 cursor-pointer pointer-events-auto ${
           isSelected
             ? 'bg-[#38bdf8] border-2 border-white text-[#060e0a] shadow-xl ring-4 ring-cyan-400/50 scale-110'
             : zone.isActieveSchoolzone
             ? 'bg-[#0891b2] border-2 border-white text-white shadow-lg shadow-cyan-950/70 ring-2 ring-cyan-400/30'
             : 'bg-[#0f766e] border border-cyan-300 text-white shadow-md'
         }">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="w-3.5 h-3.5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
             <path d="M6 12v5c3 3 9 3 12 0v-5"/>
           </svg>
@@ -554,7 +587,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
       const marker = L.marker([zone.lat, zone.lng], {
         icon: customIcon,
-        pane: 'schoolzonesPane',
+        pane: 'schoolzonesMarkersPane',
+        interactive: true,
       });
 
       marker.bindTooltip(

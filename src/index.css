@@ -139,3 +139,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.schoolzone-point-marker {
+  pointer-events: auto !important;
+}

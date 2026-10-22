@@ -333,6 +333,7 @@ export default function App() {
             onSelectAccident={(acc) => {
               setSelectedSchoolZone(null);
               handleSelectAccident(acc);
+              setFlyToTarget({ lat: acc.lat, lng: acc.lng, zoom: 16, ts: Date.now() });
             }}
           />
         </section>

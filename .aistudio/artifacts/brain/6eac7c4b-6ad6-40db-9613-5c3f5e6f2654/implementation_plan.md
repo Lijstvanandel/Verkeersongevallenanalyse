@@ -131,3 +131,24 @@ Fundamentele transformatie van de kaartapplicatie: alle openbaar-vervoer- en dee
   - In `points`-modus worden cirkelmarkers getekend volgens de officiële ArcGIS-renderer (`Dodelijk`: rood `r=8`, `Letsel`: oranje `r=6`, `Uitsluitend materiele schade`: lichtgeel `r=4.5`).
   - In `heatmap`- of `both`-modus berekent een high-performance HTML5 Canvas-laag (binnen de gemeentegrenzen, onder het zwarte buitenmasker `exteriorBlackMaskPane`) de gewogen ongevalsdichtheid (waarbij dodelijke en letselongevallen zwaarder wegen) om blackspots direct uit te lichten.
 - **Ongeval Detailkaart (ArcGIS BRON Popup stijl)**: Toont bij selectie van een marker exact de secties uit de ArcGIS Arcade-expressie (*Header met VKL_NUMMER & Ernst*, *Partijen / Jaar / Gemeente strip*, *Betrokken partijen chips met voertuigiconen*, *Details*, *Wegomstandigheden* en *Weersomstandigheden*).
+
+---
+
+## 5. Schoolzones & Map Layer Interactivity Fix
+
+### Root Cause Analysis
+- **Probleem**: Wanneer een schoolzone was aangeklikt, konden verkeersongevallen daarna niet meer worden aangeklikt op de kaart.
+- **Oorzaak**: Leaflet initialiseerde met `preferCanvas: true`. Omdat `schoolzonesPane` (z-index 420) geen eigen SVG-renderer had meegekregen en geen `pointerEvents = 'none'` op het pane-element had, creëerde Leaflet automatisch een tweede HTML5 `<canvas>`-element op z-index 420 die over de volledige kaart lag boven `accidentsPane` (z-index 410). Een canvas-element vangt in de browser alle pointer-events af en laat geen clicks door naar onderliggende canvas-elementen.
+- **Oplossing**:
+  1. **Pane Z-index Hiërarchie hersteld**:
+     - `heatmapPane`: zIndex 380 (`pointerEvents: 'none'`)
+     - `schoolzonesRoadPane`: zIndex 395 (`pointerEvents: 'none'`, dedicated `L.svg` renderer voor wegvak-polylines en 250m buffer)
+     - `accidentsPane`: zIndex 415 (dedicated `L.canvas` renderer voor alle ongevalspunten)
+     - `schoolzonesMarkersPane`: zIndex 425 (`pointerEvents: 'none'` op pane, `.schoolzone-point-marker { pointer-events: auto !important; }` op de 28x28 iconen)
+     - `selectedAccidentPane`: zIndex 435 (`pointerEvents: 'none'`)
+     - `exteriorBlackMaskPane`: zIndex 450 (`pointerEvents: 'none'`)
+  2. **Dedicated SVG Renderer voor Schoolzones**:
+     - `schoolzonesRoadPane` gebruikt nu expliciet `L.svg({ pane: 'schoolzonesRoadPane' })` voor polylines en de 250m bufferzone. Hierdoor wordt er nóóit een overlappend `<canvas>`-element aangemaakt.
+     - De 250m straalcirkel rond de geselecteerde schoolzone heeft `interactive: false` zodat alle ongevallen binnen 250m direct hoverbaar en aanklikbaar blijven.
+  3. **Naadloze Wisseling**:
+     - Klikken op een ongeval op de kaart (of in de 250m-lijst van de school) sluit direct het schoolzone-paneel, opent het ongeval-detailpaneel en centreert desgewenst op het ongeval.
